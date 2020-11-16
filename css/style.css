@@ -1,0 +1,19 @@
+/* adding font Source Code Pro */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap');
+
+/* common styles */
+* {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 600;
+}
+
+.main-bg-color {
+  background: rgb(190,20,208);
+  background: linear-gradient(90deg, rgba(190,20,208,1) 0%, rgba(89,0,255,1) 100%);
+}
+/* common styles */
+
+.custom-progress-bar {
+  height: 15px;
+  border-radius: 20px;
+}
