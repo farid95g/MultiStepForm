@@ -3,7 +3,11 @@
 
 /* common styles */
 :root {
-  font-size: 15px;  /* main font-size */
+  /* main font-size */
+  font-size: 15px;
+  /* main color */
+  --main-color: rgb(194,7,165);
+  --main-lin-gradient: linear-gradient(90deg, rgba(194,7,165,1) 0%, rgba(13,41,175,1) 100%);
 }
 
 * {
@@ -18,8 +22,8 @@
 }
 
 .main-bg-color {
-  background: rgb(190,20,208);
-  background: linear-gradient(90deg, rgba(190,20,208,1) 0%, rgba(89,0,255,1) 100%);
+  background: var(--main-color);
+  background: var(--main-lin-gradient);
 }
 
 label.required::before {
@@ -49,9 +53,23 @@ section {
   border-radius: 10px;
 }
 
-.custom-progress-bar {
-  height: 15px;
+.progress-bar-wrapper {
+  height: 24px;
   border-radius: 20px;
+  padding: 2px;
+}
+
+.custom-progress-bar {
+  height: 100%;
+  border-radius: inherit;
+  border: 1.5px solid #fff;
+  background-color: #fff;
+}
+
+.progress {
+  height: 100%;
+  border-radius: inherit;
+  width: 0;
 }
 
 .progress-step {
