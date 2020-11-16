@@ -13,6 +13,7 @@
 * {
   font-family: 'Source Code Pro', monospace;
   font-weight: 600;
+  box-sizing: border-box;
 }
 
 .shadowed {
@@ -54,22 +55,22 @@ section {
 }
 
 .progress-bar-wrapper {
-  height: 24px;
-  border-radius: 20px;
+  height: 25px;
   padding: 2px;
+  border-radius: 20px;
 }
 
 .custom-progress-bar {
   height: 100%;
-  border-radius: inherit;
-  border: 1.5px solid #fff;
   background-color: #fff;
+  border: 2px solid #fff;
+  border-radius: inherit;
 }
 
 .progress {
   height: 100%;
-  border-radius: inherit;
   width: 0;
+  border-radius: inherit;
 }
 
 .progress-step {
