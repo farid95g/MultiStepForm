@@ -14,8 +14,8 @@
 
 <body>
   <!-- main content -->
-  <main>
-    <section>
+  <main class="main-bg-color d-flex justify-content-center align-items-center">
+    <section class="shadowed p-4">
       <!-- progress bar section -->
       <div class="progress-bar-container">
         <div class="custom-progress-bar main-bg-color"></div>
@@ -24,7 +24,26 @@
 
       <!-- form section -->
       <div class="form-wrapper">
-        <form action="#" autocomplete="off"></form>
+        <form action="#" autocomplete="off">
+          <!-- name and surname fields -->
+          <div class="first-step-form progress-step">
+            <div class="h-100 d-flex flex-column justify-content-center">
+              <!-- name field -->
+              <div class="py-2">
+                <label for="name" class="required">Enter your name:</label>
+                <input type="text" name="name" id="name" class="form-control is-invalid" placeholder="Name" />
+                <div class="invalid-feedback feedback-message">Please, enter your name.</div>
+              </div>
+              <!-- surname field -->
+              <div class="py-2">
+                <label for="surname" class="required">Enter your surname:</label>
+                <input type="text" name="surname" id="surname" class="form-control is-invalid" placeholder="Surname" />
+                <div class="invalid-feedback feedback-message">Please, enter your surname.</div>
+              </div>
+            </div>
+          </div>
+          <!-- name and surname fields -->
+        </form>
       </div>
       <!-- form section -->
     </section>

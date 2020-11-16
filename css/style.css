@@ -2,18 +2,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap');
 
 /* common styles */
+:root {
+  font-size: 15px;  /* main font-size */
+}
+
 * {
   font-family: 'Source Code Pro', monospace;
   font-weight: 600;
+}
+
+.shadowed {
+  -webkit-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, .5);
+  -moz-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, .5);
+  box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, .5);
 }
 
 .main-bg-color {
   background: rgb(190,20,208);
   background: linear-gradient(90deg, rgba(190,20,208,1) 0%, rgba(89,0,255,1) 100%);
 }
+
+label.required::before {
+  content: "*";
+  color: red;
+}
+
+.feedback-message {
+  text-align: justify;
+  font-size: 13px;
+}
+
+::placeholder {
+  font-size: 13px;
+  font-weight: 400;
+}
 /* common styles */
+
+main {
+  height: 100vh;
+}
+
+section {
+  width: 40%;
+  height: 80vh;
+  background-color: #fff;
+  border-radius: 10px;
+}
 
 .custom-progress-bar {
   height: 15px;
   border-radius: 20px;
+}
+
+.progress-step {
+  height: 275px;
 }
