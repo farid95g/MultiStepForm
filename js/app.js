@@ -13,6 +13,18 @@ document.querySelector("form").addEventListener("submit", e => {
   e.preventDefault();
 });
 
+// showing and hiding buttons
+const toggleButtons = () => {
+  if (!containers[0].classList.contains("d-none")) {
+    previous.classList.add("invisible");
+  } else if (!containers[containers.length - 1].classList.contains("d-none")) {
+    next.classList.add("invisible");
+  } else {
+    previous.classList.remove("invisible");
+    next.classList.remove("invisible");
+  }
+};
+
 // next step function for hiding and showing input containers
 const nextStep = () => {
   let currentIndex;
@@ -41,6 +53,11 @@ const previousStep = () => {
   }
 }
 
+// adding some functionality on DOMContentLoaded event
+document.addEventListener("DOMContentLoaded", () => {
+  toggleButtons();
+});
+
 // next button's click event
 next.addEventListener("click", () => {
   // progress bar change
@@ -48,6 +65,7 @@ next.addEventListener("click", () => {
     progressBar.style.width = `${Number(progressBar.style.width.split('%')[0]) + 25}%`;
   }
   nextStep();
+  toggleButtons();
 });
 
 // previous button's click event
@@ -57,6 +75,7 @@ previous.addEventListener("click", () => {
     progressBar.style.width = `${Number(progressBar.style.width.split('%')[0]) - 25}%`;
   }
   previousStep();
+  toggleButtons();
 });
 
 
