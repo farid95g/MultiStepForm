@@ -79,6 +79,53 @@
           </div>
           <!-- username and email fields -->
 
+          <!-- password and password confirmation fields -->
+          <div class="third-step-form progress-step d-none">
+            <div class="h-100 d-flex flex-column justify-content-center">
+              <!-- password field -->
+              <div class="py-2">
+                <label for="password" class="required">Enter new password:</label>
+                <!-- input group for password -->
+                <div class="input-group is-invalid">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </div>
+                  <input type="password" name="password" id="password" class="form-control is-invalid" placeholder="Password" />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-dark toggle-password" type="button">
+                      <i class="far fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- input group for password -->
+                <div class="invalid-feedback feedback-message">Password can contain numbers, letters, and symbols and must contain at least 8 characters.</div>
+              </div>
+              <!-- password confirmation field -->
+              <div class="py-2">
+                <label for="password-confirmation" class="required">Confirm your password:</label>
+                <!-- input group for password confirmation -->
+                <div class="input-group is-invalid">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </div>
+                  <input type="password" name="password-confirmation" id="password-confirmation" class="form-control is-invalid" placeholder="Password confirmation" />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-dark toggle-password" type="button">
+                      <i class="far fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- input group for password confirmation -->
+                <div class="invalid-feedback feedback-message">Password confirmation field must be same as password field.</div>
+              </div>
+            </div>
+          </div>
+          <!-- password and password confirmation fields -->
+
           <!-- previous and next step buttons -->
           <div class="row mt-3">
             <div class="col-6">
