@@ -11,6 +11,11 @@ const nameAndSurname = document.querySelectorAll(".first-step-form input"),
 const usernameAndEmail = document.querySelectorAll(".second-step-form input"),
       secondFeedMsg = document.querySelectorAll(".second-step-form .feedback-message"),
       usernameRegex = /\W/;
+// password and password confirmation fields, feedback messages, and show/hide password buttons
+const passwordAndConfirmation = document.querySelectorAll(".third-step-form input"),
+      thirdFeedMsg = document.querySelectorAll(".third-step-form .feedback-message"),
+      togglePassBtns = document.querySelectorAll("button.toggle-password"),
+      togglePassIcon = document.querySelectorAll("button.toggle-password i");
 
 // previous and next buttons
 const previous = document.getElementById("previousStep"),
@@ -133,6 +138,21 @@ const secondValidation = () => {
   });
 }
 
+// show and hide password on button's click event
+togglePassBtns.forEach((button, i) => {
+  button.addEventListener("click", e => {
+    // showing and hiding password text
+    passwordAndConfirmation[i].type === "password"
+      ? passwordAndConfirmation[i].type = "text"
+      : passwordAndConfirmation[i].type = "password";
+
+      // changing button icon when showing and hiding password
+      togglePassIcon[i].className.split(' ').indexOf("fa-eye") !== -1
+      ? togglePassIcon[i].classList.replace("fa-eye", "fa-eye-slash")
+      : togglePassIcon[i].classList.replace("fa-eye-slash", "fa-eye");
+  });
+});
+
 // adding some functionality on DOMContentLoaded event
 document.addEventListener("DOMContentLoaded", () => {
   toggleButtons();
@@ -174,5 +194,5 @@ secondValidation();  // username and email fields' validation
 
 
 /** Testing Area Below **/
-console.log(usernameAndEmail);
-console.log(secondFeedMsg);
+console.log(passwordAndConfirmation);
+console.log(thirdFeedMsg);
