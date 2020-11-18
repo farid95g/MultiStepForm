@@ -86,3 +86,7 @@ section {
 .success-icon {
   font-size: 60px;
 }
+
+button[type=submit] {
+  width: 120px;
+}

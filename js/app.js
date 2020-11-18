@@ -8,22 +8,39 @@ const containers = document.querySelectorAll("div.progress-step");
 const previous = document.getElementById("previousStep"),
       next = document.getElementById("nextStep");
 
-// preventing form reloading the poge on submit
-document.querySelector("form").addEventListener("submit", e => {
-  e.preventDefault();
-});
-
 // showing and hiding buttons
 const toggleButtons = () => {
   if (!containers[0].classList.contains("d-none")) {
     previous.classList.add("invisible");
+  } else if (!containers[containers.length - 2].classList.contains("d-none")) {
+    next.classList.remove("invisible");
+    next.innerHTML = "Submit<i class='fas fa-paper-plane ml-2'></i>";
+    console.log("fourth element")
   } else if (!containers[containers.length - 1].classList.contains("d-none")) {
     next.classList.add("invisible");
+    console.log("fifth element")
   } else {
     previous.classList.remove("invisible");
     next.classList.remove("invisible");
+    next.innerHTML = "Next<i class='fas fa-arrow-right ml-2'></i>";
   }
 };
+
+// setting button state
+const setButtonState = () => {
+  let buttonState;
+  let container;
+  containers.forEach(c => {
+    if (!c.classList.contains("d-none")) {
+      container = c;
+    }
+  })
+  document.querySelectorAll(`.${container.classList[0]} input`).forEach(input => {
+    if (input.value.length === 0)
+      buttonState = false;
+  });
+  buttonState === undefined ? next.disabled = false : next.disabled = true;
+}
 
 // next step function for hiding and showing input containers
 const nextStep = () => {
@@ -56,6 +73,12 @@ const previousStep = () => {
 // adding some functionality on DOMContentLoaded event
 document.addEventListener("DOMContentLoaded", () => {
   toggleButtons();
+  setButtonState();
+});
+
+// preventing form reloading the poge on submit
+document.querySelector("form").addEventListener("submit", e => {
+  e.preventDefault();
 });
 
 // next button's click event
