@@ -7,6 +7,10 @@ const containers = document.querySelectorAll("div.progress-step");
 // name and surname fields and feedback messages
 const nameAndSurname = document.querySelectorAll(".first-step-form input"),
       firstFeedMsg = document.querySelectorAll(".first-step-form .feedback-message");
+// username and email fields and feedback messages
+const usernameAndEmail = document.querySelectorAll(".second-step-form input"),
+      secondFeedMsg = document.querySelectorAll(".second-step-form .feedback-message"),
+      usernameRegex = /\W/;
 
 // previous and next buttons
 const previous = document.getElementById("previousStep"),
@@ -39,8 +43,8 @@ const setButtonState = () => {
       container = c;
     }
   });
-  document.querySelectorAll(`.${container.classList[0]} input`).forEach(input => {
-    if (input.value.length === 0)
+  document.querySelectorAll(`.${container.classList[0]} .feedback-message`).forEach(message => {
+    if (message.classList.contains("invalid-feedback"))
       buttonState = false;
   });
   buttonState === undefined ? next.disabled = false : next.disabled = true;
@@ -78,7 +82,7 @@ const previousStep = () => {
 const firstValidation = () => {
   nameAndSurname.forEach((input, i) => {
     input.addEventListener("keyup", e => {
-      if (e.target.value.length > 0) {
+      if (e.target.value.length >= 2) {
         input.classList.replace("is-invalid", "is-valid");
         firstFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
         firstFeedMsg[i].textContent = "Looks good.";
@@ -86,6 +90,42 @@ const firstValidation = () => {
         input.classList.replace("is-valid", "is-invalid");
         firstFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
         firstFeedMsg[i].textContent = `Please, enter your ${input.getAttribute("name")}.`;
+      }
+      // invoking setButtonState function on each 'keyup' event
+      setButtonState();
+    });
+  });
+}
+
+// validation function for username and email fields
+const secondValidation = () => {
+  usernameAndEmail.forEach((input, i) => {
+    input.addEventListener("keyup", e => {
+      if (i === 0) {
+        if (e.target.value.match(usernameRegex) == null && e.target.value.length >= 3) {
+          input.classList.replace("is-invalid", "is-valid");
+          secondFeedMsg[i].classList.add("d-block");
+          secondFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
+          secondFeedMsg[i].textContent = "Looks good.";
+        } else {
+          input.classList.replace("is-valid", "is-invalid");
+          secondFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
+          secondFeedMsg[i].textContent = `Username must start with letter and can contain letters, numbers and underscore.`;
+        }
+      }
+      if (i === 1) {
+        if (e.target.value.indexOf('@') !== -1
+        && e.target.value.split('@')[0].length > 0
+        && e.target.value.slice(e.target.value.indexOf('@')).length >= 3) {
+          input.classList.replace("is-invalid", "is-valid");
+          secondFeedMsg[i].classList.add("d-block");
+          secondFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
+          secondFeedMsg[i].textContent = "Looks good.";
+        } else {
+          input.classList.replace("is-valid", "is-invalid");
+          secondFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
+          secondFeedMsg[i].textContent = `Enter an existing email address that belongs to you. Email must contain '@' character.`;
+        }
       }
       // invoking setButtonState function on each 'keyup' event
       setButtonState();
@@ -126,12 +166,13 @@ previous.addEventListener("click", () => {
   setButtonState();
 });
 
-// invoke validation functions
+// invoking validation functions below
 firstValidation();  // name and surname fields' validation
+secondValidation();  // username and email fields' validation
 
 
 
 
 /** Testing Area Below **/
-console.log(nameAndSurname);
-console.log(firstFeedMsg);
+console.log(usernameAndEmail);
+console.log(secondFeedMsg);
