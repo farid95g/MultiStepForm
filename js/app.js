@@ -4,6 +4,10 @@ const progressBar = document.querySelector(".progress");
 // input field containers
 const containers = document.querySelectorAll("div.progress-step");
 
+// name and surname fields and feedback messages
+const nameAndSurname = document.querySelectorAll(".first-step-form input"),
+      firstFeedMsg = document.querySelectorAll(".first-step-form .feedback-message");
+
 // previous and next buttons
 const previous = document.getElementById("previousStep"),
       next = document.getElementById("nextStep");
@@ -24,7 +28,7 @@ const toggleButtons = () => {
     next.classList.remove("invisible");
     next.innerHTML = "Next<i class='fas fa-arrow-right ml-2'></i>";
   }
-};
+}
 
 // setting button state
 const setButtonState = () => {
@@ -34,7 +38,7 @@ const setButtonState = () => {
     if (!c.classList.contains("d-none")) {
       container = c;
     }
-  })
+  });
   document.querySelectorAll(`.${container.classList[0]} input`).forEach(input => {
     if (input.value.length === 0)
       buttonState = false;
@@ -49,7 +53,7 @@ const nextStep = () => {
     if (!container.classList.contains("d-none")) {
       currentIndex = index;
     }
-  })
+  });
   if (currentIndex + 1 < containers.length) {
     containers[currentIndex].classList.add("d-none");
     containers[currentIndex + 1].classList.remove("d-none");
@@ -63,11 +67,30 @@ const previousStep = () => {
     if (!container.classList.contains("d-none")) {
       currentIndex = index;
     }
-  })
+  });
   if (currentIndex - 1 >= 0) {
     containers[currentIndex].classList.add("d-none");
     containers[currentIndex - 1].classList.remove("d-none");
   }
+}
+
+// validation function for name and surname fields
+const firstValidation = () => {
+  nameAndSurname.forEach((input, i) => {
+    input.addEventListener("keyup", e => {
+      if (e.target.value.length > 0) {
+        input.classList.replace("is-invalid", "is-valid");
+        firstFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
+        firstFeedMsg[i].textContent = "Looks good.";
+      } else {
+        input.classList.replace("is-valid", "is-invalid");
+        firstFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
+        firstFeedMsg[i].textContent = `Please, enter your ${input.getAttribute("name")}.`;
+      }
+      // invoking setButtonState function on each 'keyup' event
+      setButtonState();
+    });
+  });
 }
 
 // adding some functionality on DOMContentLoaded event
@@ -89,6 +112,7 @@ next.addEventListener("click", () => {
   }
   nextStep();
   toggleButtons();
+  setButtonState();
 });
 
 // previous button's click event
@@ -99,10 +123,15 @@ previous.addEventListener("click", () => {
   }
   previousStep();
   toggleButtons();
+  setButtonState();
 });
+
+// invoke validation functions
+firstValidation();  // name and surname fields' validation
 
 
 
 
 /** Testing Area Below **/
-console.log(containers);
+console.log(nameAndSurname);
+console.log(firstFeedMsg);
