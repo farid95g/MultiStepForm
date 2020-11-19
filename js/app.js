@@ -12,7 +12,7 @@ const usernameAndEmail = document.querySelectorAll(".second-step-form input"),
       secondFeedMsg = document.querySelectorAll(".second-step-form .feedback-message"),
       usernameRegex = /\W/;
 // password and password confirmation fields, feedback messages, and show/hide password buttons
-const passwordAndConfirmation = document.querySelectorAll(".third-step-form input"),
+const passAndConfirm = document.querySelectorAll(".third-step-form input"),
       thirdFeedMsg = document.querySelectorAll(".third-step-form .feedback-message"),
       togglePassBtns = document.querySelectorAll("button.toggle-password"),
       togglePassIcon = document.querySelectorAll("button.toggle-password i");
@@ -107,7 +107,7 @@ const secondValidation = () => {
   usernameAndEmail.forEach((input, i) => {
     input.addEventListener("keyup", e => {
       if (i === 0) {
-        if (e.target.value.match(usernameRegex) == null && e.target.value.length >= 3) {
+        if (e.target.value.match(usernameRegex) == null && e.target.value.length >= 4) {
           input.classList.replace("is-invalid", "is-valid");
           secondFeedMsg[i].classList.add("d-block");
           secondFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
@@ -115,7 +115,7 @@ const secondValidation = () => {
         } else {
           input.classList.replace("is-valid", "is-invalid");
           secondFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
-          secondFeedMsg[i].textContent = `Username must start with letter and can contain letters, numbers and underscore.`;
+          secondFeedMsg[i].textContent = `Username must start with letter, can contain letters, numbers and underscore, and must contain at least 4 characters.`;
         }
       }
       if (i === 1) {
@@ -142,9 +142,9 @@ const secondValidation = () => {
 togglePassBtns.forEach((button, i) => {
   button.addEventListener("click", e => {
     // showing and hiding password text
-    passwordAndConfirmation[i].type === "password"
-      ? passwordAndConfirmation[i].type = "text"
-      : passwordAndConfirmation[i].type = "password";
+    passAndConfirm[i].type === "password"
+      ? passAndConfirm[i].type = "text"
+      : passAndConfirm[i].type = "password";
 
       // changing button icon when showing and hiding password
       togglePassIcon[i].className.split(' ').indexOf("fa-eye") !== -1
@@ -152,6 +152,45 @@ togglePassBtns.forEach((button, i) => {
       : togglePassIcon[i].classList.replace("fa-eye-slash", "fa-eye");
   });
 });
+
+// validation function for password and password confirmation fields
+const thirdValidation = () => {
+  passAndConfirm.forEach((input, i) => {
+    var password = "";
+    input.addEventListener("keyup", e => {
+      if (i === 0) {
+        if (e.target.value.length >= 8
+          && e.target.value.match(/[A-Z]/) != null
+          && e.target.value.match(/[0-9]/) != null
+          && e.target.value.match(/\W/) != null) {
+          input.classList.replace("is-invalid", "is-valid");
+          thirdFeedMsg[i].classList.add("d-block");
+          thirdFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
+          thirdFeedMsg[i].textContent = "Looks good.";
+        } else {
+          input.classList.replace("is-valid", "is-invalid");
+          thirdFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
+          thirdFeedMsg[i].textContent = `Password must contain at least 1 uppercase letter, 1 number, and 1 non-alphanumeric character. The minimum length of the password must be 8 characters.`;
+        }
+        localStorage.setItem("password", e.target.value);
+      }
+      if (i === 1) {
+        if (e.target.value === localStorage.getItem("password")) {
+          input.classList.replace("is-invalid", "is-valid");
+          thirdFeedMsg[i].classList.add("d-block");
+          thirdFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
+          thirdFeedMsg[i].textContent = "Looks good.";
+        } else {
+          input.classList.replace("is-valid", "is-invalid");
+          thirdFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
+          thirdFeedMsg[i].textContent = `Password confirmation field must contain same value as password field.`;
+        }
+      }
+      // invoking setButtonState function on each 'keyup' event
+      setButtonState();
+    });
+  });
+}
 
 // adding some functionality on DOMContentLoaded event
 document.addEventListener("DOMContentLoaded", () => {
@@ -189,10 +228,11 @@ previous.addEventListener("click", () => {
 // invoking validation functions below
 firstValidation();  // name and surname fields' validation
 secondValidation();  // username and email fields' validation
+thirdValidation();  // password and password confirmation fields' validation
 
 
 
 
 /** Testing Area Below **/
-console.log(passwordAndConfirmation);
+console.log(passAndConfirm);
 console.log(thirdFeedMsg);
