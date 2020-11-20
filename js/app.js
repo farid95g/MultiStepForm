@@ -16,6 +16,9 @@ const passAndConfirm = document.querySelectorAll(".third-step-form input"),
       thirdFeedMsg = document.querySelectorAll(".third-step-form .feedback-message"),
       togglePassBtns = document.querySelectorAll("button.toggle-password"),
       togglePassIcon = document.querySelectorAll("button.toggle-password i");
+// birthday and phone number fields, feedback messages, and show/hide password buttons
+const birthdayAndPhone = document.querySelectorAll(".fourth-step-form input"),
+      fourthFeedMsg = document.querySelectorAll(".fourth-step-form .feedback-message");
 
 // previous and next buttons
 const previous = document.getElementById("previousStep"),
@@ -156,7 +159,6 @@ togglePassBtns.forEach((button, i) => {
 // validation function for password and password confirmation fields
 const thirdValidation = () => {
   passAndConfirm.forEach((input, i) => {
-    var password = "";
     input.addEventListener("keyup", e => {
       if (i === 0) {
         if (e.target.value.length >= 8
@@ -189,6 +191,71 @@ const thirdValidation = () => {
       // invoking setButtonState function on each 'keyup' event
       setButtonState();
     });
+  });
+}
+
+// validation function for birthday and phone number fields
+const fourthValidation = () => {
+  birthdayAndPhone.forEach((input, i) => {
+    if (i === 0) {
+      input.addEventListener("change", e => {
+        let date = e.target.value.split('-');
+        let birthday = `${date[2]} ${new Date(date[0], date[1] - 1, date[2]).toLocaleString('en-us', { month: 'long' })} ${date[0]}`;
+        if (e.target.value !== undefined){
+          input.classList.replace("is-invalid", "is-valid");
+          fourthFeedMsg[i].classList.add("d-block");
+          fourthFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
+          fourthFeedMsg[i].textContent = "Looks good.";
+        } else {
+          input.classList.replace("is-valid", "is-invalid");
+          fourthFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
+          fourthFeedMsg[i].textContent = `Select your birthday date.`;
+        }
+        console.log(e.target.value)
+        // invoking setButtonState function on each 'keyup' event
+        setButtonState();
+      });
+      input.addEventListener("keyup", e => {
+        if (e.target.value === ""){
+          input.classList.replace("is-valid", "is-invalid");
+          fourthFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
+          fourthFeedMsg[i].textContent = `Select your birthday date.`;
+        }
+        console.log(e.target.value)
+        // invoking setButtonState function on each 'keyup' event
+        setButtonState();
+      });
+    }
+    if (i === 1) {
+      input.addEventListener("focus", e => {
+        if (e.target.value === "")
+          e.target.value = "+994 ";
+      });
+      input.addEventListener("blur", e => {
+        if (e.target.value.length <= 5)
+          e.target.value = "";
+      });
+      input.addEventListener("keyup", e => {
+        if (e.target.value.length === 7) {
+          e.target.value += " ";
+        } else if (e.target.value.length === 11) {
+          e.target.value += " ";
+        } else if (e.target.value.length === 14) {
+          e.target.value += " ";
+        } else if (e.target.value.length === 17) {
+          input.classList.replace("is-invalid", "is-valid");
+          fourthFeedMsg[i].classList.add("d-block");
+          fourthFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
+          fourthFeedMsg[i].textContent = "Looks good.";
+        } else if (e.target.value.length < 17) {
+          input.classList.replace("is-valid", "is-invalid");
+          fourthFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
+          fourthFeedMsg[i].textContent = `Enter your phone number.`;
+        }
+        // invoking setButtonState function on each 'keyup' event
+        setButtonState();
+      });
+    }
   });
 }
 
@@ -229,10 +296,12 @@ previous.addEventListener("click", () => {
 firstValidation();  // name and surname fields' validation
 secondValidation();  // username and email fields' validation
 thirdValidation();  // password and password confirmation fields' validation
+fourthValidation();  // birthday and phone number fields' validation
 
 
 
 
 /** Testing Area Below **/
-console.log(passAndConfirm);
-console.log(thirdFeedMsg);
+console.log(birthdayAndPhone);
+console.log(fourthFeedMsg);
+// localStorage.removeItem("password");
