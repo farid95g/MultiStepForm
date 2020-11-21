@@ -78,19 +78,31 @@ section {
   height: 275px;
 }
 
+.toggle-password {
+  width: 40px;
+}
+
 .success-message {
   color: #28a745;
   font-weight: 600;
-}
-
-.success-icon {
-  font-size: 60px;
 }
 
 button[type=submit] {
   width: 120px;
 }
 
+/* overriding bootstrap styles */
+.form-control:focus, .btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.btn-outline-dark:hover, .btn-outline-dark:focus {
+  background: transparent !important;
+  color: #343a40;
+}
+/* overriding bootstrap styles */
+
+/* animatable check mark */
 svg {
   width: 100px;
   display: block;
@@ -148,3 +160,4 @@ svg {
     stroke-dashoffset: 900;
   }
 }
+/* animatable check mark */
