@@ -235,14 +235,17 @@ const fourthValidation = () => {
         if (e.target.value.length <= 5)
           e.target.value = "";
       });
-      input.addEventListener("keyup", e => {
+      input.addEventListener("keydown", e => {
         if (e.target.value.length === 7) {
           e.target.value += " ";
         } else if (e.target.value.length === 11) {
           e.target.value += " ";
         } else if (e.target.value.length === 14) {
           e.target.value += " ";
-        } else if (e.target.value.length === 17) {
+        }
+      });
+      input.addEventListener("keyup", e => {
+        if (e.target.value.length === 17 && e.target.value.match(e.target.getAttribute("pattern"))) {
           input.classList.replace("is-invalid", "is-valid");
           fourthFeedMsg[i].classList.add("d-block");
           fourthFeedMsg[i].classList.replace("invalid-feedback", "valid-feedback");
