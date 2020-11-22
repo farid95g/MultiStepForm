@@ -80,6 +80,28 @@ section {
 
 .toggle-password {
   width: 40px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.toggle-password span {
+  width: 80px;
+  transition: transform .2s;
+}
+
+.toggle-password i {
+  width: 50%;
+}
+
+.toggle-password:hover span {
+  transform: translateX(-50%);
+}
+
+.password-shown {
+  transform: translateX(-50%);
+}
+.password-hidden {
+  transform: translateX(0);
 }
 
 .success-message {

@@ -15,6 +15,7 @@ const usernameAndEmail = document.querySelectorAll(".second-step-form input"),
 const passAndConfirm = document.querySelectorAll(".third-step-form input"),
       thirdFeedMsg = document.querySelectorAll(".third-step-form .feedback-message"),
       togglePassBtns = document.querySelectorAll("button.toggle-password"),
+      passIconWrapper = document.querySelectorAll("button.toggle-password span"),
       togglePassIcon = document.querySelectorAll("button.toggle-password i");
 // birthday and phone number fields, feedback messages, and show/hide password buttons
 const birthdayAndPhone = document.querySelectorAll(".fourth-step-form input"),
@@ -149,10 +150,20 @@ togglePassBtns.forEach((button, i) => {
       ? passAndConfirm[i].type = "text"
       : passAndConfirm[i].type = "password";
 
-      // changing button icon when showing and hiding password
-      togglePassIcon[i].className.split(' ').indexOf("fa-eye") !== -1
-      ? togglePassIcon[i].classList.replace("fa-eye", "fa-eye-slash")
-      : togglePassIcon[i].classList.replace("fa-eye-slash", "fa-eye");
+    // adding animation for the show and hide password icons
+    passIconWrapper[i].className.split(' ').indexOf("password-shown") === -1
+      ? passIconWrapper[i].classList.add("password-shown")
+      : passIconWrapper[i].classList.remove("password-shown");
+  });
+  button.addEventListener("mouseenter", e => {
+    passIconWrapper[i].className.split(' ').indexOf("password-shown") !== -1
+      ? passIconWrapper[i].style.transform = "translateX(0)"
+      : passIconWrapper[i].style.transform = "translateX(-50%)";
+  });
+  button.addEventListener("mouseleave", e => {
+    passIconWrapper[i].className.split(' ').indexOf("password-shown") !== -1
+      ? passIconWrapper[i].style.transform = "translateX(-50%)"
+      : passIconWrapper[i].style.transform = "translateX(0)";
   });
 });
 
