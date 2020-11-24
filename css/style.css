@@ -48,8 +48,7 @@ main {
 }
 
 section {
-  width: 40%;
-  height: 80vh;
+  min-height: 80vh;
   background-color: #fff;
   border-radius: 10px;
 }
@@ -180,3 +179,14 @@ svg {
   }
 }
 /* animatable check mark */
+
+/* responsive */
+@media (max-width: 576px) {
+  :root, .feedback-message, ::placeholder {
+    font-size: 12px;
+  }
+  button[type=submit] {
+    width: auto;
+  }
+}
+/* responsive */
