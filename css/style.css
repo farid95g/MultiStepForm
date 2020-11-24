@@ -97,11 +97,8 @@ section {
   transform: translateX(-50%);
 }
 
-.password-shown {
+.is-shown {
   transform: translateX(-50%);
-}
-.password-hidden {
-  transform: translateX(0);
 }
 
 .success-message {

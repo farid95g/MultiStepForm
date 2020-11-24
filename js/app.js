@@ -151,17 +151,17 @@ togglePassBtns.forEach((button, i) => {
       : passAndConfirm[i].type = "password";
 
     // adding animation for the show and hide password icons
-    passIconWrapper[i].className.split(' ').indexOf("password-shown") === -1
-      ? passIconWrapper[i].classList.add("password-shown")
-      : passIconWrapper[i].classList.remove("password-shown");
+    passIconWrapper[i].className.split(' ').indexOf("is-shown") === -1
+      ? passIconWrapper[i].classList.add("is-shown")
+      : passIconWrapper[i].classList.remove("is-shown");
   });
   button.addEventListener("mouseenter", e => {
-    passIconWrapper[i].className.split(' ').indexOf("password-shown") !== -1
+    passIconWrapper[i].className.split(' ').indexOf("is-shown") !== -1
       ? passIconWrapper[i].style.transform = "translateX(0)"
       : passIconWrapper[i].style.transform = "translateX(-50%)";
   });
   button.addEventListener("mouseleave", e => {
-    passIconWrapper[i].className.split(' ').indexOf("password-shown") !== -1
+    passIconWrapper[i].className.split(' ').indexOf("is-shown") !== -1
       ? passIconWrapper[i].style.transform = "translateX(-50%)"
       : passIconWrapper[i].style.transform = "translateX(0)";
   });
@@ -247,12 +247,8 @@ const fourthValidation = () => {
           e.target.value = "";
       });
       input.addEventListener("keydown", e => {
-        if (e.target.value.length === 7) {
-          e.target.value += " ";
-        } else if (e.target.value.length === 11) {
-          e.target.value += " ";
-        } else if (e.target.value.length === 14) {
-          e.target.value += " ";
+        if ([7, 11, 14].indexOf(e.target.value.length) !== -1 && e.keyCode !== 8) {
+          e.target.value += ' ';
         }
       });
       input.addEventListener("keyup", e => {
