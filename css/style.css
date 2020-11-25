@@ -51,12 +51,14 @@ section {
   min-height: 80vh;
   background-color: #fff;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .progress-bar-wrapper {
   height: 25px;
   padding: 2px;
   border-radius: 20px;
+  margin: 0 25px;
 }
 
 .progress-bar {
@@ -73,8 +75,15 @@ section {
   border-radius: inherit;
 }
 
+.form-wrapper form > div:first-child {
+  width: 500%;
+  transition: transform .5s;
+}
+
 .progress-step {
   height: 275px;
+  width: 20%;
+  padding: 0 25px;
 }
 
 .toggle-password {
@@ -117,6 +126,11 @@ button[type=submit] {
 .btn-outline-dark:hover, .btn-outline-dark:focus {
   background: transparent !important;
   color: #343a40;
+}
+
+[class*="col-"] {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 /* overriding bootstrap styles */
 

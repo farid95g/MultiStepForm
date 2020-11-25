@@ -1,8 +1,9 @@
 // progress bar
 const progressBar = document.querySelector(".progress");
 
-// input field containers
-const containers = document.querySelectorAll("div.progress-step");
+// main container and input field containers
+const mainContainer = document.querySelector("form > div"),
+      containers = document.querySelectorAll("div.progress-step");
 
 // name and surname fields and feedback messages
 const nameAndSurname = document.querySelectorAll(".first-step-form input"),
@@ -27,13 +28,13 @@ const previous = document.getElementById("previousStep"),
 
 // showing and hiding buttons
 const toggleButtons = () => {
-  if (!containers[0].classList.contains("d-none")) {
+  if (containers[0].classList.contains("active")) {
     previous.classList.add("invisible");
-  } else if (!containers[containers.length - 2].classList.contains("d-none")) {
+  } else if (containers[containers.length - 2].classList.contains("active")) {
     next.classList.remove("invisible");
     next.innerHTML = "Submit<i class='fas fa-paper-plane ml-2'></i>";
     console.log("fourth element")
-  } else if (!containers[containers.length - 1].classList.contains("d-none")) {
+  } else if (containers[containers.length - 1].classList.contains("active")) {
     next.classList.add("invisible");
     console.log("fifth element")
   } else {
@@ -48,7 +49,7 @@ const setButtonState = () => {
   let buttonState;
   let container;
   containers.forEach(c => {
-    if (!c.classList.contains("d-none")) {
+    if (c.classList.contains("active")) {
       container = c;
     }
   });
@@ -63,13 +64,18 @@ const setButtonState = () => {
 const nextStep = () => {
   let currentIndex;
   containers.forEach((container, index) => {
-    if (!container.classList.contains("d-none")) {
+    if (container.classList.contains("active")) {
       currentIndex = index;
     }
   });
   if (currentIndex + 1 < containers.length) {
-    containers[currentIndex].classList.add("d-none");
-    containers[currentIndex + 1].classList.remove("d-none");
+    let pos = (currentIndex + 1) * 20;
+    console.log(pos)
+    containers[currentIndex].classList.remove("active");
+    containers[currentIndex].classList.add("animate__bounceOutLeft");
+    mainContainer.style.transform = `translateX(${-pos}%)`;
+    containers[currentIndex + 1].classList.remove("animate__bounceOutRight");
+    containers[currentIndex + 1].classList.add("active", "animate__bounceInRight");
   }
 }
 
@@ -77,13 +83,18 @@ const nextStep = () => {
 const previousStep = () => {
   let currentIndex;
   containers.forEach((container, index) => {
-    if (!container.classList.contains("d-none")) {
+    if (container.classList.contains("active")) {
       currentIndex = index;
     }
   });
   if (currentIndex - 1 >= 0) {
-    containers[currentIndex].classList.add("d-none");
-    containers[currentIndex - 1].classList.remove("d-none");
+    let pos = (currentIndex - 1) * 20;
+    console.log(pos)
+    containers[currentIndex].classList.remove("active");
+    containers[currentIndex].classList.add("animate__bounceOutRight");
+    mainContainer.style.transform = `translateX(${-pos}%)`;
+    containers[currentIndex - 1].classList.remove("animate__bounceOutLeft", "animate__bounceInRight");
+    containers[currentIndex - 1].classList.add("active", "animate__bounceInLeft");
   }
 }
 
