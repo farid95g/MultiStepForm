@@ -302,6 +302,14 @@ previous.addEventListener("click", () => {
   setButtonState();
 });
 
+// function for keydown of enter key
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter") {  // .keyCode is deprecated, so key is recommended to use
+    next.click();
+    e.preventDefault();
+  }
+});
+
 // invoking validation functions below
 firstValidation();  // name and surname fields' validation
 secondValidation();  // username and email fields' validation
