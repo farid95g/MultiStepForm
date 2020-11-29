@@ -33,10 +33,8 @@ const toggleButtons = () => {
   } else if (containers[containers.length - 2].classList.contains("active")) {
     next.classList.remove("invisible");
     next.innerHTML = "Submit<i class='fas fa-paper-plane ml-2'></i>";
-    console.log("fourth element")
   } else if (containers[containers.length - 1].classList.contains("active")) {
     next.classList.add("invisible");
-    console.log("fifth element")
   } else {
     previous.classList.remove("invisible");
     next.classList.remove("invisible");
@@ -70,7 +68,6 @@ const nextStep = () => {
   });
   if (currentIndex + 1 < containers.length) {
     let pos = (currentIndex + 1) * 20;
-    console.log(pos)
     containers[currentIndex].classList.remove("active");
     containers[currentIndex].classList.add("animate__bounceOutLeft");
     mainContainer.style.transform = `translateX(${-pos}%)`;
@@ -89,7 +86,6 @@ const previousStep = () => {
   });
   if (currentIndex - 1 >= 0) {
     let pos = (currentIndex - 1) * 20;
-    console.log(pos)
     containers[currentIndex].classList.remove("active");
     containers[currentIndex].classList.add("animate__bounceOutRight");
     mainContainer.style.transform = `translateX(${-pos}%)`;
@@ -233,7 +229,6 @@ const fourthValidation = () => {
           fourthFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
           fourthFeedMsg[i].textContent = `Select your birthday date.`;
         }
-        console.log(e.target.value)
         // invoking setButtonState function on each 'keyup' event
         setButtonState();
       });
@@ -243,7 +238,6 @@ const fourthValidation = () => {
           fourthFeedMsg[i].classList.replace("valid-feedback", "invalid-feedback");
           fourthFeedMsg[i].textContent = `Select your birthday date.`;
         }
-        console.log(e.target.value)
         // invoking setButtonState function on each 'keyup' event
         setButtonState();
       });
@@ -328,9 +322,4 @@ thirdValidation();  // password and password confirmation fields' validation
 fourthValidation();  // birthday and phone number fields' validation
 
 
-
-
-/** Testing Area Below **/
-console.log(birthdayAndPhone);
-console.log(fourthFeedMsg);
 // localStorage.removeItem("password");
